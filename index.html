@@ -1,0 +1,416 @@
+<title>La Casita</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg:#FBF3E6;
+    --surface:#FFFFFF;
+    --surface-2:#F3E7D4;
+    --ink:#2B1B14;
+    --ink-soft:#6B5347;
+    --accent:#12847E;
+    --accent-deep:#0B5F5B;
+    --accent-ink:#EAFBF9;
+    --ember:#C4472B;
+    --gold:#E3A73C;
+    --line:#E7D8BF;
+    --shadow: 0 18px 40px -22px rgba(43,27,20,.45);
+    --radius-lg: 28px;
+    --radius-md: 18px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1C130E; --surface:#271A14; --surface-2:#32221A;
+      --ink:#F6EADA; --ink-soft:#CDB39D;
+      --accent:#31BDB3; --accent-deep:#1F8F87; --accent-ink:#0D2624;
+      --ember:#E48059; --gold:#F0C066; --line:#4A362A;
+      --shadow: 0 18px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1C130E; --surface:#271A14; --surface-2:#32221A;
+    --ink:#F6EADA; --ink-soft:#CDB39D;
+    --accent:#31BDB3; --accent-deep:#1F8F87; --accent-ink:#0D2624;
+    --ember:#E48059; --gold:#F0C066; --line:#4A362A;
+    --shadow: 0 18px 40px -20px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Work Sans', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{ font-family:'Baloo 2', ui-rounded, sans-serif; font-weight:800; text-wrap:balance; margin:0; }
+  p{ line-height:1.6; color:var(--ink-soft); margin:0; }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  .wrap{ max-width:1120px; margin-inline:auto; padding-inline:20px; }
+  section{ padding-block: 72px; }
+  @media (max-width:640px){ section{ padding-block:52px; } }
+
+  .ic{ stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:50;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  .nav-inner{ max-width:1120px; margin-inline:auto; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand-mark{
+    width:42px; height:42px; border-radius:50%; flex-shrink:0;
+    background:radial-gradient(circle at 32% 28%, var(--gold), var(--ember) 70%);
+    display:grid; place-items:center; box-shadow: var(--shadow); color:#fff8f0;
+  }
+  .brand-mark .ic{ width:22px; height:22px; }
+  .brand-text .display{ font-size:19px; line-height:1; color:var(--ink); }
+  .brand-text small{ display:block; font-size:11px; letter-spacing:.06em; color:var(--ink-soft); margin-top:3px; }
+  .nav-cta{
+    background:var(--accent); color:var(--accent-ink); font-weight:700; font-size:13.5px;
+    padding:10px 16px; border-radius:999px; text-decoration:none; white-space:nowrap; box-shadow: var(--shadow);
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .nav-cta .ic{ width:15px; height:15px; }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding-block:56px 60px; }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:44px; align-items:center; }
+  @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; background:var(--surface-2); border:1px solid var(--line);
+    color:var(--accent-deep); font-weight:700; font-size:12.5px; letter-spacing:.04em; padding:7px 14px 7px 11px;
+    border-radius:999px; margin-bottom:18px;
+  }
+  .eyebrow .ic{ width:15px; height:15px; }
+  .hero h1{ font-size:clamp(34px,5.2vw,54px); line-height:1.04; }
+  .hero h1 .hl{ color:var(--ember); }
+  .hero p.lead{ font-size:17px; margin-top:18px; max-width:46ch; }
+  .hero-actions{ display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
+  .btn{
+    font-family:inherit; font-weight:700; font-size:15px; text-decoration:none; padding:14px 24px;
+    border-radius:999px; border:2px solid transparent; cursor:pointer; display:inline-flex; align-items:center;
+    gap:8px; transition:transform .15s, box-shadow .15s;
+  }
+  .btn .ic{ width:17px; height:17px; }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--ember); color:#fff8f2; box-shadow:0 14px 26px -12px color-mix(in srgb, var(--ember) 70%, transparent); }
+  .btn-outline{ background:transparent; border-color:var(--line); color:var(--ink); }
+  .btn-outline:hover{ border-color:var(--accent); color:var(--accent-deep); }
+
+  .hero-photo{ position:relative; }
+  .hero-photo .frame{ border-radius:36px 36px 36px 8px; overflow:hidden; box-shadow:var(--shadow); border:6px solid var(--surface); aspect-ratio:4/4.6; }
+  .hero-photo img{ width:100%; height:100%; object-fit:cover; }
+  .hero-badge{
+    position:absolute; left:-14px; bottom:22px; background:var(--surface); border:1px solid var(--line);
+    box-shadow:var(--shadow); border-radius:18px; padding:12px 16px; display:flex; align-items:center; gap:10px; max-width:220px;
+  }
+  .hero-badge .badge-ico{ width:34px; height:34px; border-radius:50%; background:var(--surface-2); display:grid; place-items:center; color:var(--accent-deep); flex-shrink:0; }
+  .hero-badge .badge-ico .ic{ width:18px; height:18px; }
+  .hero-badge .t{ font-size:11.5px; color:var(--ink-soft); line-height:1.3; font-weight:600; }
+  @media (max-width:480px){ .hero-badge{ left:8px; } }
+
+  /* ---------- TICKER ---------- */
+  .ticker-wrap{ background:var(--ink); overflow:hidden; padding-block:16px; border-block:1px solid var(--line); }
+  .ticker{ display:flex; gap:46px; white-space:nowrap; width:max-content; animation:scroll 48s linear infinite; }
+  .ticker span{ font-family:'Baloo 2'; font-weight:700; font-size:17px; letter-spacing:.04em; color:var(--gold); display:flex; align-items:center; gap:14px; }
+  .ticker span svg{ width:6px; height:6px; }
+  .ticker span svg circle{ fill:var(--ember); }
+  @keyframes scroll{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+  @media (prefers-reduced-motion: reduce){ .ticker{ animation:none; } }
+
+  /* ---------- SECTION HEAD ---------- */
+  .sec-head{ max-width:640px; margin-bottom:38px; }
+  .sec-head .eyebrow{ margin-bottom:14px; }
+  .sec-head h2{ font-size:clamp(26px,3.6vw,36px); }
+  .sec-head p{ margin-top:12px; font-size:15.5px; }
+
+  /* ---------- MENU ---------- */
+  .tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:30px; }
+  .tab{
+    font-family:'Baloo 2'; font-weight:700; font-size:14.5px; cursor:pointer; padding:10px 18px;
+    border-radius:999px; border:2px solid var(--line); background:var(--surface); color:var(--ink-soft);
+    transition:.15s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .tab .ic{ width:16px; height:16px; }
+  .tab[aria-selected="true"]{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+  .tab:hover{ border-color:var(--accent); }
+
+  .menu-panel-body{ display:grid; grid-template-columns:.85fr 1.15fr; gap:26px; align-items:stretch; }
+  @media (max-width:760px){ .menu-panel-body{ grid-template-columns:1fr; } }
+  .menu-photo{ border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow); min-height:180px; }
+  .menu-photo img{ width:100%; height:100%; object-fit:cover; }
+  .menu-photo.no-photo{
+    background:var(--surface-2); display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:10px; color:var(--accent-deep); border:1.5px dashed var(--line);
+  }
+  .menu-photo.no-photo .ic{ width:40px; height:40px; }
+  .menu-photo.no-photo span{ font-size:12.5px; font-weight:600; color:var(--ink-soft); }
+
+  .menu-list{ display:flex; flex-direction:column; gap:10px; }
+  .item{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:16px 18px; display:flex; justify-content:space-between; gap:14px; align-items:center;
+  }
+  .item .name{ font-family:'Baloo 2'; font-weight:700; font-size:16px; }
+  .item .desc{ font-size:13px; margin-top:3px; max-width:32ch; }
+  .item .price{
+    font-family:'Baloo 2'; font-weight:800; font-size:15.5px; color:var(--accent-deep);
+    white-space:nowrap; background:var(--surface-2); padding:5px 11px; border-radius:10px;
+  }
+  .panel{ display:none; }
+  .panel.active{ display:block; }
+  .menu-note{ margin-top:16px; font-size:13px; background:var(--surface-2); border-radius:12px; padding:12px 14px; color:var(--ink-soft); display:flex; gap:10px; align-items:flex-start; }
+  .menu-note .ic{ width:16px; height:16px; margin-top:2px; color:var(--accent-deep); }
+
+  .teaser-strip{
+    margin-top:28px; display:flex; align-items:center; gap:14px; padding:16px 20px; border-radius:var(--radius-md);
+    border:1.5px dashed var(--line); background:var(--surface-2); flex-wrap:wrap;
+  }
+  .teaser-strip .ico{ width:38px; height:38px; border-radius:50%; background:var(--surface); display:grid; place-items:center; color:var(--ember); flex-shrink:0; }
+  .teaser-strip .ico .ic{ width:19px; height:19px; }
+  .teaser-strip p{ font-size:13.5px; }
+  .teaser-strip strong{ color:var(--ink); }
+
+  /* ---------- GALLERY / NOSOTROS ---------- */
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center; }
+  @media (max-width:860px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-text p + p{ margin-top:14px; }
+  .about-photo{ border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow); border:6px solid var(--surface); aspect-ratio:4/3.4; }
+  .about-photo img{ width:100%; height:100%; object-fit:cover; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:20px; }
+  @media (max-width:760px){ .contact-grid{ grid-template-columns:1fr; } }
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:30px; box-shadow:var(--shadow); }
+  .info-row{ display:flex; gap:14px; padding-block:14px; border-bottom:1px solid var(--line); }
+  .info-row:last-child{ border-bottom:none; }
+  .info-row .ico{ width:34px; height:34px; border-radius:10px; background:var(--surface-2); color:var(--accent-deep); display:grid; place-items:center; flex-shrink:0; }
+  .info-row .ico .ic{ width:17px; height:17px; }
+  .info-row .label{ font-family:'Baloo 2'; font-weight:700; font-size:14.5px; }
+  .info-row .val{ font-size:13.5px; margin-top:3px; }
+  .note{ margin-top:18px; font-size:12.5px; background:var(--surface-2); border-radius:12px; padding:12px 14px; color:var(--ink-soft); display:flex; gap:8px; }
+  .note .ic{ width:15px; height:15px; margin-top:1px; color:var(--accent-deep); flex-shrink:0; }
+  .map-card{
+    background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden;
+    box-shadow:var(--shadow); text-decoration:none; display:block; transition:transform .15s;
+  }
+  .map-card:hover{ transform:translateY(-2px); }
+  .map-card img{ width:100%; aspect-ratio:16/10; object-fit:cover; }
+  .map-card-foot{ display:flex; align-items:center; justify-content:space-between; padding:14px 18px; font-weight:700; font-size:13.5px; color:var(--ink); }
+  .map-card-foot span{ display:flex; align-items:center; gap:8px; }
+  .map-card-foot .ic{ width:16px; height:16px; color:var(--ember); }
+  .map-card-foot > .ic{ color:var(--ink-soft); width:15px; height:15px; }
+
+  footer{ padding-block:30px; text-align:center; border-top:1px solid var(--line); }
+  footer p{ font-size:12.5px; }
+  footer .display{ font-size:16px; margin-bottom:6px; color:var(--ink); display:flex; align-items:center; justify-content:center; gap:8px; }
+  footer .display .ic{ width:18px; height:18px; }
+
+  @media (prefers-reduced-motion: reduce){ *{ animation-duration:.001ms !important; } }
+</style>
+
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<defs>
+  <symbol id="i-tortilla" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.3"/><circle cx="9" cy="9.3" r=".9" fill="currentColor" stroke="none"/><circle cx="15" cy="9.3" r=".9" fill="currentColor" stroke="none"/><circle cx="8.6" cy="14.4" r=".9" fill="currentColor" stroke="none"/><circle cx="15.4" cy="14.4" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r=".9" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 21.5c4.1 0 7.2-2.7 7.2-6.7 0-3.6-2.3-5.4-3.1-7.8-.4 1.4-1.4 2.6-2.4 3.4.2-2.1-.6-4.4-2.4-6.4-.4 2.6-1.9 4.2-3.4 6-1.1 1.4-1.9 3-1.9 4.8 0 4 3.1 6.7 6 6.7z"/></symbol>
+  <symbol id="i-corn" viewBox="0 0 24 24"><path d="M8 21c-2.5-2.5-4-6-4-10a9 9 0 0 1 9-9c4 0 8 1.5 8 8 0 6.5-5 11-9 11l-4-.5z"/><path d="M8.5 7.5l1.2 1.2M11 6l1.2 1.2M13.5 5l1.2 1.2M7 10.5l1.2 1.2M9.5 9l1.2 1.2M12 8l1.2 1.2M14.5 7l1.2 1.2M6 14l1.2 1.2M8.5 12.5l1.2 1.2M11 11l1.2 1.2M13.5 10l1.2 1.2M16 9l1.2 1.2" stroke-width="1.4"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-7.6 7-12a7 7 0 1 0-14 0c0 4.4 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.4 2"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.3 8.3 0 0 1-3.8-.9L3 21l1.9-5.7a8.3 8.3 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3a8.4 8.4 0 0 1 8.5 8.5z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 21c8 0 14-6 14-14V5h-2C9 5 5 11 5 19v2z"/><path d="M5 19c4-4 8-6 12-6"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24"><path d="M6.5 3h11l-1.3 13.2a4 4 0 0 1-4 3.6h-.4a4 4 0 0 1-4-3.6L6.5 3z"/><path d="M9.3 3 8.7 1"/><path d="M15 3l.6-2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7"/><path d="M21 3l-9 9"/><path d="M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="8" r=".9" fill="currentColor" stroke="none"/></symbol>
+</defs>
+</svg>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark"><svg class="ic" viewBox="0 0 24 24"><use href="#i-corn"/></svg></span>
+      <span class="brand-text">
+        <span class="display">La Casita</span>
+        <small>PUPUSERÍA &amp; TORTILLERÍA</small>
+      </span>
+    </a>
+    <a class="nav-cta" href="tel:+50364315411"><svg class="ic" viewBox="0 0 24 24"><use href="#i-phone"/></svg>6431-5411</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><svg class="ic" viewBox="0 0 24 24"><use href="#i-flame"/></svg>Al comal, hechas al momento</span>
+        <h1>Pupusas y tortillas <span class="hl">como en casa.</span></h1>
+        <p class="lead">Masa de maíz preparada a mano cada día, palmeada y cocida en el momento — la receta de siempre, sin atajos. Empezamos con pupusas y tortillas; con el tiempo sumamos más variedad.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#menu"><svg class="ic" viewBox="0 0 24 24"><use href="#i-tortilla"/></svg>Ver el menú</a>
+          <a class="btn btn-outline" href="#ubicacion"><svg class="ic" viewBox="0 0 24 24"><use href="#i-pin"/></svg>Ubicación</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="frame">
+          <img src="img/foto2.jpg" alt="Señora preparando pupusas a mano sobre el comal en La Casita" />
+        </div>
+        <div class="hero-badge">
+          <span class="badge-ico"><svg class="ic" viewBox="0 0 24 24"><use href="#i-check"/></svg></span>
+          <span class="t">Hechas a mano, todos los días</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker">
+      <span>QUESO<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+      <span>FRIJOL<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+      <span>REVUELTA<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+      <span>LOROCO<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+      <span>AYOTE<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+      <span>CAMARÓN<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+      <span>QUESO<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+      <span>FRIJOL<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+      <span>REVUELTA<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+      <span>LOROCO<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+      <span>AYOTE<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+      <span>CAMARÓN<svg viewBox="0 0 6 6"><circle cx="3" cy="3" r="3"/></svg></span>
+    </div>
+  </div>
+
+  <section id="menu">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow"><svg class="ic" viewBox="0 0 24 24"><use href="#i-tortilla"/></svg>Nuestro menú</span>
+        <h2>Lo de siempre, bien hecho.</h2>
+        <p>Pupusas, tortillas y bebidas — lo que vendemos hoy, fresco y al momento.</p>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" data-panel="pupusas"><svg class="ic" viewBox="0 0 24 24"><use href="#i-tortilla"/></svg>Pupusas</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="tortillas"><svg class="ic" viewBox="0 0 24 24"><use href="#i-tortilla"/></svg>Tortillas</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="bebidas"><svg class="ic" viewBox="0 0 24 24"><use href="#i-cup"/></svg>Bebidas</button>
+      </div>
+
+      <div class="panel active" id="panel-pupusas">
+        <div class="menu-panel-body">
+          <div class="menu-photo"><img src="img/pupusas.jpg" alt="Pupusa servida con guacamole"></div>
+          <div class="menu-list">
+            <div class="item"><div><div class="name">Frijol con queso</div><div class="desc">La combinación de siempre.</div></div><div class="price">$0.50</div></div>
+            <div class="item"><div><div class="name">Revuelta</div><div class="desc">Frijol, queso y chicharrón.</div></div><div class="price">$0.50</div></div>
+            <div class="item"><div><div class="name">Ayote con queso</div><div class="desc">Ayote sazón casera y queso fresco.</div></div><div class="price">$1.00</div></div>
+            <div class="item"><div><div class="name">Queso con loroco</div><div class="desc"><svg class="ic" viewBox="0 0 24 24" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px;"><use href="#i-leaf"/></svg>También disponible sin loroco.</div></div><div class="price">$1.00</div></div>
+            <div class="item"><div><div class="name">Camarón</div><div class="desc">Con queso y camarón.</div></div><div class="price">$1.25</div></div>
+            <div class="item"><div><div class="name">Jalapeño</div><div class="desc">Con queso, para los que pican.</div></div><div class="price">$1.00</div></div>
+          </div>
+        </div>
+        <div class="menu-note"><svg class="ic" viewBox="0 0 24 24"><use href="#i-info"/></svg>Se sirven con curtido y salsa de la casa.</div>
+      </div>
+
+      <div class="panel" id="panel-tortillas">
+        <div class="menu-panel-body">
+          <div class="menu-photo"><img src="img/tortillas.jpg" alt="Pila de tortillas de maíz recién hechas"></div>
+          <div class="menu-list">
+            <div class="item"><div><div class="name">Tortillas</div><div class="desc">Maíz molido, recién palmeadas — se venden por montón.</div></div><div class="price">4 x $0.25</div></div>
+            <div class="item"><div><div class="name">Pedido por encargo</div><div class="desc">Cantidades grandes para eventos.</div></div><div class="price">Cotizar</div></div>
+          </div>
+        </div>
+        <div class="menu-note"><svg class="ic" viewBox="0 0 24 24"><use href="#i-info"/></svg>«La cora» = 4 tortillas por $0.25.</div>
+      </div>
+
+      <div class="panel" id="panel-bebidas">
+        <div class="menu-panel-body">
+          <div class="menu-photo no-photo"><svg class="ic" viewBox="0 0 24 24"><use href="#i-cup"/></svg><span>Foto próximamente</span></div>
+          <div class="menu-list">
+            <div class="item"><div><div class="name">Gaseosa</div><div class="desc">Bien fría, para acompañar.</div></div><div class="price">Disponible</div></div>
+            <div class="item"><div><div class="name">Frescos naturales</div><div class="desc">De temporada, hechos en casa.</div></div><div class="price">Disponible</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="teaser-strip">
+        <span class="ico"><svg class="ic" viewBox="0 0 24 24"><use href="#i-clock"/></svg></span>
+        <p><strong>Más adelante</strong> sumamos desayunos, almuerzos y cenas al menú. Por ahora nuestro fuerte son las pupusas y tortillas de siempre.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros">
+    <div class="wrap about-grid">
+      <div class="about-text">
+        <span class="eyebrow"><svg class="ic" viewBox="0 0 24 24"><use href="#i-corn"/></svg>Nuestra historia</span>
+        <h2 style="font-size:clamp(24px,3.4vw,32px);margin-top:14px;">Masa hecha a mano, receta de familia.</h2>
+        <p style="margin-top:16px;">En La Casita cada pupusa se palmea a mano y se cuece al comal, una por una, igual que se ha hecho siempre en casa. Nada de prisas: la masa se prepara fresca y las tortillas salen calientitas para cada cliente.</p>
+        <p>Empezamos vendiendo pupusas y tortillas al local — poco a poco vamos sumando más variedad, con la misma sazón de siempre.</p>
+      </div>
+      <div class="about-photo">
+        <img src="img/foto2.jpg" alt="Señora echando tortillas a mano sobre el comal en La Casita"/>
+      </div>
+    </div>
+  </section>
+
+  <section id="ubicacion">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow"><svg class="ic" viewBox="0 0 24 24"><use href="#i-pin"/></svg>Visítanos</span>
+        <h2>Encuéntranos en Google Maps.</h2>
+        <p>Búscanos como <strong>«Pupusería y Tortillería La Casita»</strong> — con gusto te esperamos.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="card">
+          <div class="info-row">
+            <span class="ico"><svg class="ic" viewBox="0 0 24 24"><use href="#i-pin"/></svg></span>
+            <div><div class="label">Dirección</div><div class="val">Campos Verdes 1, SDA 8 Ote., Pje. 27, Casa 48 — Colón, La Libertad</div></div>
+          </div>
+          <div class="info-row">
+            <span class="ico"><svg class="ic" viewBox="0 0 24 24"><use href="#i-clock"/></svg></span>
+            <div><div class="label">Horario</div><div class="val">Lunes a domingo, 5:00 pm – 9:00 pm</div></div>
+          </div>
+          <div class="info-row">
+            <span class="ico"><svg class="ic" viewBox="0 0 24 24"><use href="#i-phone"/></svg></span>
+            <div><div class="label">Llamadas</div><div class="val"><a href="tel:+50364315411" style="color:inherit;text-decoration:underline;">6431-5411</a></div></div>
+          </div>
+          <div class="info-row">
+            <span class="ico"><svg class="ic" viewBox="0 0 24 24"><use href="#i-chat"/></svg></span>
+            <div><div class="label">WhatsApp</div><div class="val"><a href="https://wa.me/50364315411" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">6431-5411</a></div></div>
+          </div>
+        </div>
+        <a class="map-card" href="https://www.google.com/maps?q=13.713799331675629,-89.36370967138568" target="_blank" rel="noopener">
+          <img src="img/mapa.jpg" alt="Mapa de ubicación de La Casita en Campos Verdes, Colón"/>
+          <div class="map-card-foot">
+            <span><svg class="ic" viewBox="0 0 24 24"><use href="#i-pin"/></svg>Ver ubicación exacta</span>
+            <svg class="ic" viewBox="0 0 24 24"><use href="#i-external"/></svg>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="display"><svg class="ic" viewBox="0 0 24 24"><use href="#i-corn"/></svg>La Casita</div>
+    <p>Pupusería &amp; Tortillería · Hecho a mano, todos los días.</p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var tabs = document.querySelectorAll('.tab');
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        tabs.forEach(function(t){ t.setAttribute('aria-selected','false'); });
+        document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+        tab.setAttribute('aria-selected','true');
+        document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+      });
+    });
+  })();
+</script>
