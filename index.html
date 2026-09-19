@@ -209,7 +209,7 @@
     box-shadow:var(--shadow); text-decoration:none; display:block; transition:transform .15s;
   }
   .map-card:hover{ transform:translateY(-2px); }
-  .map-card img{ width:100%; aspect-ratio:16/10; object-fit:cover; }
+  .map-card img, .map-card iframe{ width:100%; aspect-ratio:16/10; object-fit:cover; border:0; display:block; }
   .map-card-foot{ display:flex; align-items:center; justify-content:space-between; padding:14px 18px; font-weight:700; font-size:13.5px; color:var(--ink); }
   .map-card-foot span{ display:flex; align-items:center; gap:8px; }
   .map-card-foot .ic{ width:16px; height:16px; color:var(--ember); }
@@ -395,13 +395,13 @@
             <div><div class="label">WhatsApp</div><div class="val"><a href="https://wa.me/50364315411" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">6431-5411</a></div></div>
           </div>
         </div>
-        <a class="map-card" href="https://www.google.com/maps?q=13.713799331675629,-89.36370967138568" target="_blank" rel="noopener">
-          <img src="img/mapa.jpg" alt="Mapa de ubicación de La Casita en Campos Verdes, Colón"/>
-          <div class="map-card-foot">
+        <div class="map-card">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3876.0769183547936!2d-89.3637134!3d13.7137911!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f6329c14b2ef8b7%3A0x86cd9434939a5bae!2sPupuser%C3%ADa%20y%20Tortiller%C3%ADa%20La%20Casita!5e0!3m2!1ses-419!2ssv!4v1789860597041!5m2!1ses-419!2ssv" title="Mapa de ubicación de La Casita en Campos Verdes, Colón" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <a class="map-card-foot" href="https://www.google.com/maps/place/Pupuser%C3%ADa+y+Tortiller%C3%ADa+La+Casita/@13.7137911,-89.3637134,17z" target="_blank" rel="noopener">
             <span><svg class="ic" viewBox="0 0 24 24"><use href="#i-pin"/></svg>Ver ubicación exacta</span>
             <svg class="ic" viewBox="0 0 24 24"><use href="#i-external"/></svg>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
     </div>
   </section>
